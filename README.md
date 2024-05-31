@@ -1,0 +1,1 @@
+Welcome to my ecommerce-web app, to run the program clone the repo, open your terminal while you are in the vscode prompt and run "npm start" , then click on the local host link and you are good to go!
