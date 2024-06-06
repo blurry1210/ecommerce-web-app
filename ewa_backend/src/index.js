@@ -13,11 +13,11 @@ const statsRoutes = require('./routes/statsRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
-
-
+dotenv.config();
 const app = express();
 
-app.use(cors({
+app.use(
+    cors({
     origin: 'http://localhost:5173',
     methods: 'GET,POST,PUT,DELETE',
     credentials: true
@@ -25,9 +25,7 @@ app.use(cors({
 
 app.use(express.json());
 
-
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
 
 app.use('/api/users', userRoutes);
 app.use('/api/items', itemRoutes);
@@ -38,7 +36,14 @@ app.use('/api/payments', paymentRoutes);
 app.get('/', (req, res) => {
     res.send('Hello from Express backend!');
 });
-
+app.post("/api/admin/login", (req, res) => {
+  const { password } = req.body;
+  if (password === process.env.ADMIN_PASSWORD) {
+    res.status(200).json({ message: "Login successful" });
+  } else {
+    res.status(401).json({ message: "Incorrect password" });
+  }
+});
 
 const dbURI = process.env.DB_URI;
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
