@@ -26,6 +26,8 @@ import CheckoutForm from './pages/CheckoutForm/CheckoutForm';
 import DistributorOrders from './pages/profile/DistributorOrders';
 import PaymentPage from './pages/Payment/PaymentPage';
 import RoleBasedProfile from './pages/profile/RoleBasedProfile';
+import Admin from "./pages/admin/Admin";
+import ForgotPassword from "./pages/login/ForgotPassword";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -76,6 +78,8 @@ function App() {
                     <Route path="/verify/:userId/:token" element={<EmailVerify />} />
                     <Route path="/product/:productId" element={<Product />} />
                     <Route path="/edit-item/:productId" element={<ProtectedRoute element={EditItem} />} /> 
+                    <Route path="/login/forgot_password" element={<ForgotPassword />}/>
+                    <Route path="/admin/*" element={<Admin />} />
                     <Route path="*" element={<div>404 Not Found</div>} />
                   </Routes>
                 </Layout>
